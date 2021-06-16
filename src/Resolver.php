@@ -161,7 +161,7 @@ class Resolver
      */
     private function getClassDependencies()
     {
-        $aParameters = $this->oClassReflection->getConstructor()->getParameters();
+        $aParameters = $this->oClassReflection->getConstructor() === null ? [] : $this->oClassReflection->getConstructor()->getParameters();
         $this->aDependencies = (isset(self::$aClassDependencies[$this->sCurrentClass]) === true) ? self::$aClassDependencies[$this->sCurrentClass] : [];
         foreach ($aParameters as $iKey => $oParameter) {
             $this->aDependencies[$iKey] = $this->provideIfParameterNotYetExist($iKey, $oParameter);
