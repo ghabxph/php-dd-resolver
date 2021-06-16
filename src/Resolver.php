@@ -67,7 +67,7 @@ class Resolver
      * @param string $sClass
      * @param string $sConcrete
      */
-    public static function bind(string $sClass, string $sConcrete)
+    public static function bind($sClass, $sConcrete)
     {
         self::$aBoundClasses[$sClass] = $sConcrete;
     }
@@ -78,7 +78,7 @@ class Resolver
      * @param string $sClass
      * @param $oSingleton
      */
-    public static function singleton(string $sClass, $oSingleton)
+    public static function singleton($sClass, $oSingleton)
     {
         self::$aSingletons[$sClass] = $oSingleton;
     }
@@ -89,7 +89,7 @@ class Resolver
      * @param string $sClass
      * @param array  $aDependencies
      */
-    public static function setClassDependencies(string $sClass, array $aDependencies)
+    public static function setClassDependencies($sClass, $aDependencies)
     {
         self::$aClassDependencies[$sClass] = $aDependencies;
     }
@@ -114,7 +114,7 @@ class Resolver
      * @return mixed
      * @throws ReflectionException
      */
-    public static function provide(string $sClass)
+    public static function provide($sClass)
     {
         $oInstance = self::getInstance();
         return $oInstance->doProvide($sClass);
@@ -127,7 +127,7 @@ class Resolver
      * @return mixed
      * @throws ReflectionException
      */
-    public function doProvide(string $sClass)
+    public function doProvide($sClass)
     {
         $this->setCurrentClass($sClass);
         if (isset(self::$aSingletons[$sClass]) === true) {
@@ -144,7 +144,7 @@ class Resolver
      * @param string $sClass
      * @return $this
      */
-    private function setCurrentClass(string $sClass)
+    private function setCurrentClass($sClass)
     {
         $this->sCurrentClass = (isset(self::$aBoundClasses[$sClass]) === false) ? $sClass : self::$aBoundClasses[$sClass];
         if ($sClass !== $this->sCurrentClass) {
@@ -177,7 +177,7 @@ class Resolver
      * @return mixed
      * @throws ReflectionException
      */
-    private function provideIfParameterNotYetExist(int $iKey, ReflectionParameter $oParameter)
+    private function provideIfParameterNotYetExist($iKey, ReflectionParameter $oParameter)
     {
         if (isset(self::$aClassDependencies[$this->sCurrentClass]) && isset(self::$aClassDependencies[$this->sCurrentClass][$iKey])) {
             return (new Resolver())->doProvide(self::$aClassDependencies[$this->sCurrentClass][$iKey]);
