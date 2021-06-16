@@ -3,6 +3,7 @@
     "description": "Dynamically resolve class using this Gabriel's Resolver. Inspired from Laravel's app()->make() class provider.",
     "type": "library",
     "license": "MIT",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Gabriel Lucernas Pascual",
